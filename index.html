@@ -337,7 +337,6 @@
     const grid = document.getElementById('galleryGrid');
     grid.innerHTML = galleryImages.map((img, idx) => `
       <div class="gallery-item">
-        <img src="./images/${img}" alt="Gallery image ${idx + 1}" onerror="this.src='./images/placeholder.jpg'">
         <div class="gallery-overlay">🔥 Glory Moment 🔥</div>
       </div>
     `).join('');
