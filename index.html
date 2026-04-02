@@ -109,11 +109,11 @@
     <h2 class="section-title">DOMINATION STATS</h2>
     <div class="stats-hub">
       <div class="stats-grid" id="statsGrid">
-        <div class="stat-item"><div class="stat-number" id="matchesPlayed">0</div><div>Matches Played</div></div>
-        <div class="stat-item"><div class="stat-number" id="winsCount">0</div><div>Wins</div></div>
-        <div class="stat-item"><div class="stat-number" id="drawsCount">0</div><div>Draws</div></div>
-        <div class="stat-item"><div class="stat-number" id="lossesCount">0</div><div>Losses</div></div>
-        <div class="stat-item"><div class="stat-number" id="goalsScored">0</div><div>Goals Scored</div></div>
+        <div class="stat-item"><div class="stat-number" id="matchesPlayed">24</div><div>Matches Played</div></div>
+        <div class="stat-item"><div class="stat-number" id="winsCount">18</div><div>Wins</div></div>
+        <div class="stat-item"><div class="stat-number" id="drawsCount">3</div><div>Draws</div></div>
+        <div class="stat-item"><div class="stat-number" id="lossesCount">3</div><div>Losses</div></div>
+        <div class="stat-item"><div class="stat-number" id="goalsScored">35</div><div>Goals Scored</div></div>
       </div>
       <div class="form-badges" id="formBadges"></div>
     </div>
@@ -127,8 +127,6 @@
     <div class="gallery-masonry" id="galleryGrid"></div>
   </div>
 </section>
-
-<!-- Fan Zone -->
 
 <!-- Contact Section -->
 <section id="contact">
@@ -145,11 +143,8 @@
   <p>© 2025 AGNIROX FC — FUELED BY FIRE. DRIVEN BY PASSION. — #RiseFromAshes</p>
 </footer>
 
-
-<!-- Lightbox Modal -->
-
 <script>
-  // Local stats (no Firebase connection)
+  // ========== LOCAL STATS ==========
   let stats = {
     played: 24,
     wins: 18,
@@ -164,15 +159,12 @@
     document.getElementById('drawsCount').textContent = stats.draws;
     document.getElementById('lossesCount').textContent = stats.losses;
     document.getElementById('goalsScored').textContent = stats.goals;
-    
-    // Update form display based on actual stats
     updateFormDisplay();
   }
 
   // Update form badges
   function updateFormDisplay() {
     const formContainer = document.getElementById('formBadges');
-    // Generate realistic form based on win/loss ratio
     let form = [];
     const winRate = stats.wins / (stats.played || 1);
     const drawRate = stats.draws / (stats.played || 1);
@@ -204,9 +196,7 @@
     }, 3000);
   }
 
-  // Expose refresh function
   window.refreshStats = function() {
-    // Refresh is handled by local state on this page
     updateStatsDisplay();
     showNotification('🔄 Stats are always up-to-date');
   };
@@ -225,7 +215,6 @@
       container.appendChild(particle);
     }
   }
-  createParticles();
 
   // ========== TYPING EFFECT ==========
   const taglines = ["Fueled by Fire.", "Driven by Passion.", "Built for Glory.", "Rise Like Phoenix."];
@@ -256,9 +245,8 @@
     }
     setTimeout(typeEffect, isDeleting ? 50 : 100);
   }
-  typeEffect();
 
-  // ========== QUOTE CAROUSEL ==========
+  // ========== QUOTE CAROUSEL (FIXED - NO INFINITE LOOP) ==========
   const quotes = [
     '🔥 "Passion burns eternal." 🔥',
     '⚡ "Train like beasts. Play like legends." ⚡',
@@ -266,17 +254,23 @@
     '💪 "Believe. Conquer. Rise." 💪'
   ];
   let quoteIndex = 0;
-  setInterval(() => {
+  let quoteInterval = null;
+
+  function startQuoteCarousel() {
     const quoteEl = document.getElementById('quoteCarousel');
-    if(quoteEl) {
+    if (!quoteEl) return;
+    
+    if (quoteInterval) clearInterval(quoteInterval);
+    
+    quoteInterval = setInterval(() => {
       quoteIndex = (quoteIndex + 1) % quotes.length;
       quoteEl.style.opacity = '0';
       setTimeout(() => {
         quoteEl.textContent = quotes[quoteIndex];
         quoteEl.style.opacity = '1';
       }, 300);
-    }
-  }, 4000);
+    }, 4000);
+  }
 
   // ========== PLAYER DATA ==========
   const players = [
@@ -295,15 +289,14 @@
     { name: "Atanu", img: "atanu.jpg" },
     { name: "Suvo", img: "suvo.jpg" },
     { name: "Snehank Bhattacharjee", img: "bubun.jpg" },
-    { name: "Sayan", img: "suvo.jpg" }
-   
+    { name: "Sayan"}
   ];
 
   function renderPlayers() {
     const grid = document.getElementById('playersGrid');
     grid.innerHTML = players.map(p => `
       <div class="player-card" onclick="showPlayerProfile('${p.name}')">
-        <img class="player-img" src="./images/${p.img}" alt="${p.name}" onerror="this.src='./images/placeholder.jpg'">
+        <img class="player-img" src="./images/${p.img || ''}" alt="${p.name}">
         <div class="player-info">
           <h3 class="player-name">${p.name}</h3>
           <div class="player-number" style="font-size: 19px;">Core member</div>
@@ -314,34 +307,19 @@
 
   // ========== GALLERY ==========
   const galleryImages = [
-    "1.jpg",
-    "2.jpg",
-    "3.jpg",
-    "4.jpg",
-    "5.jpg",
-    "6.jpg",
-    "7.jpg",
-    "8.jpg",
-    "9.jpg",
-    "10.jpg",
-    "11.jpg",
-    "12.jpg",
-    "13.jpg",
-    "14.jpg",
-    "15.jpg",
-    "16.jpg",
-    "17.jpg",
+    "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg",
+    "9.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg"
   ];
 
   function renderGallery() {
     const grid = document.getElementById('galleryGrid');
     grid.innerHTML = galleryImages.map((img, idx) => `
       <div class="gallery-item">
+        <img src="./images/${img}" alt="Gallery image ${idx + 1}">
         <div class="gallery-overlay">🔥 Glory Moment 🔥</div>
       </div>
     `).join('');
   }
-
 
   // ========== MOBILE MENU ==========
   const menuToggle = document.getElementById('menuToggle');
@@ -380,6 +358,9 @@
   }
 
   // ========== INITIALIZE EVERYTHING ==========
+  createParticles();
+  typeEffect();
+  startQuoteCarousel();
   renderPlayers();
   renderGallery();
   updateStatsDisplay();
@@ -390,7 +371,7 @@
       section.style.opacity = '1';
       section.style.transform = 'translateY(0)';
     });
-    showNotification('Guyz!! Welcome to Agnirox FC! ');
+    showNotification('🔥 Welcome to Agnirox FC! 🔥');
   });
 </script>
 </body>
