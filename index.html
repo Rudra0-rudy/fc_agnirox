@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Agnirox FC - Official Website</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
@@ -15,7 +15,7 @@
 <nav class="nav-bar">
   <div class="logo-container">
     <div class="team-logo">
-      <img src="logo.png" alt="Agnirox FC Logo" border="0" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+      <img src="./images/logo.png" alt="Agnirox FC Logo" border="0" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
     </div>
     <div class="logo">AGNIROX FC</div>
   </div>
@@ -53,7 +53,7 @@
     <div class="coach-container">
       <div class="coach-image">
         <div class="golden-frame"></div>
-        <img src="biswa1.jpg" alt="biswa da1" border="0" style="width: 100%; height: 100%; object-fit: cover;">
+        <img src="./images/biswa1.jpg" alt="biswa da1" border="0" style="width: 100%; height: 100%; object-fit: cover;">
       </div>
       <div class="coach-info">
         <h3 class="coach-name">Biswarup Adhikary (Biswa Daa)</h3>
@@ -303,7 +303,7 @@
     const grid = document.getElementById('playersGrid');
     grid.innerHTML = players.map(p => `
       <div class="player-card" onclick="showPlayerProfile('${p.name}')">
-        <img class="player-img" src="${p.img}" alt="${p.name}">
+        <img class="player-img" src="./images/${p.img}" alt="${p.name}" onerror="this.src='./images/placeholder.jpg'">
         <div class="player-info">
           <h3 class="player-name">${p.name}</h3>
           <div class="player-number" style="font-size: 19px;">Core member</div>
@@ -337,7 +337,7 @@
     const grid = document.getElementById('galleryGrid');
     grid.innerHTML = galleryImages.map((img, idx) => `
       <div class="gallery-item">
-        <img src="${img}" alt="Gallery image ${idx + 1}">
+        <img src="./images/${img}" alt="Gallery image ${idx + 1}" onerror="this.src='./images/placeholder.jpg'">
         <div class="gallery-overlay">🔥 Glory Moment 🔥</div>
       </div>
     `).join('');
