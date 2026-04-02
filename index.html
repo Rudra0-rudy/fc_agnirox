@@ -3,232 +3,197 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Agnirox FC - Official Website</title>
- <style>
+  <title>Agnirox FC - Official Website | Rise From Ashes</title>
+  <style>
     * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background: #0A0A0A;
-    color: #fff;
-    overflow-x: hidden;
-    font-family: 'Poppins', 'Segoe UI', 'Roboto', sans-serif;
-    line-height: 1.55;
-    font-size: 1rem;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&family=Rajdhani:wght@300;400;500;600;700&display=swap');
-
-:root {
-    --obsidian: #0A0A0A;
-    --inferno: #DC2F02;
-    --royal-gold: #FFB347;
-    --ember: #FF6A4B;
-    --ash: #2A2A2A;
-    --fire-glow: rgba(220, 47, 2, 0.4);
-
-    --text: #F4F4F8;
-    --muted: #b7b7b7;
-    --heading: #ffffff;
-    --line-height: 1.45;
-
-    --font-sans: 'Poppins', 'Segoe UI', 'Roboto', sans-serif;
-    --font-display: 'Orbitron', 'Rajdhani', sans-serif;
-}
-
-body,
-button,
-input,
-select,
-textarea {
-    font-family: var(--font-sans);
-    letter-spacing: 0.01em;
-}
-
-p,
-li {
-    color: var(--text);
-    font-size: 1rem;
-    line-height: var(--line-height);
-    margin-bottom: 0.75rem;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: var(--font-display);
-    color: var(--heading);
-    letter-spacing: 0.03em;
-    margin-bottom: 0.8rem;
-    font-weight: 700;
-    line-height: 1.2;
-}
-
-h1 {
-    font-size: clamp(2.5rem, 5vw, 6rem);
-}
-
-h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
-}
-
-h3 {
-    font-size: clamp(1.75rem, 3vw, 2.4rem);
-}
-
-.section-title {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-family: var(--font-display);
-    color: var(--heading);
-    letter-spacing: 0.04em;
-    line-height: 1.15;
-    margin-bottom: 1.5rem;
-}
-
-/* Custom Cursor */
-.custom-cursor {
-    width: 20px;
-    height: 20px;
-    background: radial-gradient(circle, #FF6A4B, #DC2F02);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.1s;
-    mix-blend-mode: screen;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--obsidian);
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(var(--inferno), var(--royal-gold));
-    border-radius: 10px;
-}
-
-/* Navigation */
-.nav-bar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(10, 10, 10, 0.95);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-    padding: 0.8rem 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(255, 179, 71, 0.3);
-    transition: all 0.3s;
-}
-
-/* Logo Container */
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.team-logo {
-    width: 45px;
-    height: 45px;
-    background: linear-gradient(135deg, var(--inferno), var(--royal-gold));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-    font-weight: bold;
-    box-shadow: 0 0 15px rgba(220, 47, 2, 0.6);
-    animation: logoGlow 2s infinite alternate;
-}
-
-@keyframes logoGlow {
-    0% {
-        box-shadow: 0 0 5px rgba(220, 47, 2, 0.4);
-        transform: scale(1);
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    100% {
-        box-shadow: 0 0 20px rgba(255, 179, 71, 0.8);
-        transform: scale(1.05);
+    body {
+      background: #0A0A0A;
+      color: #fff;
+      overflow-x: hidden;
+      font-family: 'Poppins', 'Segoe UI', 'Roboto', sans-serif;
+      line-height: 1.55;
+      font-size: 1rem;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      cursor: none; /* Hide default cursor for custom cursor effect */
     }
-}
 
-.logo {
-    font-family: 'Orbitron', monospace;
-    font-size: 1.5rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, #fff, var(--royal-gold));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&family=Rajdhani:wght@300;400;500;600;700&display=swap');
 
-.nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-    font-size: 1rem;
-}
+    :root {
+      --obsidian: #0A0A0A;
+      --inferno: #DC2F02;
+      --royal-gold: #FFB347;
+      --ember: #FF6A4B;
+      --ash: #2A2A2A;
+      --fire-glow: rgba(220, 47, 2, 0.4);
+      --text: #F4F4F8;
+      --muted: #b7b7b7;
+      --heading: #ffffff;
+      --line-height: 1.45;
+      --font-sans: 'Poppins', 'Segoe UI', 'Roboto', sans-serif;
+      --font-display: 'Orbitron', 'Rajdhani', sans-serif;
+    }
 
-.nav-links a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transition: color 0.2s ease, transform 0.2s ease;
-    position: relative;
-}
+    body, button, input, select, textarea {
+      font-family: var(--font-sans);
+      letter-spacing: 0.01em;
+    }
 
-.nav-links a:hover {
-    color: var(--royal-gold);
-    transform: translateY(-1px);
-}
+    p, li {
+      color: var(--text);
+      font-size: 1rem;
+      line-height: var(--line-height);
+      margin-bottom: 0.75rem;
+    }
 
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 0;
-    width: 0%;
-    height: 2px;
-    background: linear-gradient(90deg, var(--inferno), var(--royal-gold));
-    transition: 0.3s;
-}
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-display);
+      color: var(--heading);
+      letter-spacing: 0.03em;
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
 
-.nav-links a:hover::after {
-    width: 100%;
-}
+    h1 { font-size: clamp(2.5rem, 5vw, 6rem); }
+    h2 { font-size: clamp(2rem, 4vw, 3rem); }
+    h3 { font-size: clamp(1.75rem, 3vw, 2.4rem); }
 
-.menu-toggle {
-    display: none;
-    font-size: 1.8rem;
-    cursor: pointer;
-}
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-family: var(--font-display);
+      color: var(--heading);
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
 
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
+    /* Custom Cursor - RED DOT with glow */
+    .custom-cursor {
+      width: 24px;
+      height: 24px;
+      background: radial-gradient(circle, #FF6A4B, #DC2F02);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      box-shadow: 0 0 15px rgba(220, 47, 2, 0.8);
+      transition: transform 0.08s ease-out;
+      mix-blend-mode: screen;
+    }
+
+    /* Cursor hover effect on clickable elements */
+    .custom-cursor.hover {
+      transform: scale(1.5);
+      background: radial-gradient(circle, #FFB347, #DC2F02);
+      box-shadow: 0 0 25px rgba(255, 179, 71, 0.9);
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: var(--obsidian); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(var(--inferno), var(--royal-gold)); border-radius: 10px; }
+
+    /* Navigation */
+    .nav-bar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 0.8rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 179, 71, 0.3);
+      transition: all 0.3s;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .team-logo {
+      width: 45px;
+      height: 45px;
+      background: linear-gradient(135deg, var(--inferno), var(--royal-gold));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      box-shadow: 0 0 15px rgba(220, 47, 2, 0.6);
+      animation: logoGlow 2s infinite alternate;
+      overflow: hidden;
+    }
+
+    .team-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @keyframes logoGlow {
+      0% { box-shadow: 0 0 5px rgba(220, 47, 2, 0.4); transform: scale(1); }
+      100% { box-shadow: 0 0 20px rgba(255, 179, 71, 0.8); transform: scale(1.05); }
+    }
+
+    .logo {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff, var(--royal-gold));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
     .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      font-size: 1rem;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s ease, transform 0.2s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover { color: var(--royal-gold); transform: translateY(-1px); }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--inferno), var(--royal-gold));
+      transition: 0.3s;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    .menu-toggle { display: none; font-size: 1.8rem; cursor: pointer; }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      .nav-links {
         position: fixed;
         top: 70px;
         left: -100%;
@@ -240,484 +205,224 @@ h3 {
         justify-content: center;
         transition: 0.4s;
         backdrop-filter: blur(20px);
+      }
+      .nav-links.active { left: 0; }
+      .team-logo { width: 35px; height: 35px; font-size: 1.3rem; }
+      .logo { font-size: 1.2rem; }
+      body { cursor: auto; }
+      .custom-cursor { display: none; }
     }
 
-    .nav-links.active {
-        left: 0;
+    /* Particle Container */
+    .particle-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
     }
 
-    .team-logo {
-        width: 35px;
-        height: 35px;
-        font-size: 1.3rem;
+    .particle {
+      position: absolute;
+      background: radial-gradient(circle, #FF6A4B, #DC2F02);
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: floatParticle linear infinite;
     }
 
-    .logo {
-        font-size: 1.2rem;
-    }
-}
-
-/* Particle Container */
-.particle-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.particle {
-    position: absolute;
-    background: radial-gradient(circle, #FF6A4B, #DC2F02);
-    border-radius: 50%;
-    opacity: 0.6;
-    animation: floatParticle linear infinite;
-}
-
-@keyframes floatParticle {
-    0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
+    @keyframes floatParticle {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.6; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
     }
 
-    10% {
-        opacity: 0.6;
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-top: 70px;
     }
 
-    90% {
-        opacity: 0.6;
+    .hero-bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
     }
 
-    100% {
-        transform: translateY(-100vh) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-/* Hero Section */
-.hero {
-    min-height: 100vh;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin-top: 70px;
-}
-
-.hero-bg-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -2;
-}
-
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.9));
-    z-index: -1;
-}
-
-.hero-content {
-    z-index: 2;
-    animation: fadeInUp 1s ease;
-}
-
-.hero h1 {
-    font-size: 6rem;
-    font-family: 'Orbitron', monospace;
-    font-weight: 900;
-    background: linear-gradient(135deg, #fff, var(--royal-gold), var(--inferno));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: flameText 2s infinite alternate;
-}
-
-@keyframes flameText {
-    0% {
-        text-shadow: 0 0 20px rgba(220, 47, 2, 0.5);
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.9));
+      z-index: -1;
     }
 
-    100% {
-        text-shadow: 0 0 40px rgba(255, 179, 71, 0.8);
-    }
-}
-
-.tagline {
-    font-size: 1.5rem;
-    margin: 1.5rem 0;
-    min-height: 80px;
-}
-
-.typed-text {
-    border-right: 2px solid var(--royal-gold);
-    padding-right: 5px;
-}
-
-.btn-cta {
-    background: linear-gradient(90deg, var(--inferno), var(--ember));
-    padding: 1rem 2.5rem;
-    border: none;
-    border-radius: 50px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-    position: relative;
-    overflow: hidden;
-}
-
-.btn-cta:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(220, 47, 2, 0.8);
-}
-
-.scroll-indicator {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(10px);
-    }
-}
-
-/* Section Styles */
-section {
-    padding: 100px 5%;
-    position: relative;
-}
-
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-/* Coach Section */
-.coach-section {
-    background: linear-gradient(135deg, #0F0F0F, #1A1A1A);
-    position: relative;
-    overflow: hidden;
-}
-
-.coach-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-}
-
-.coach-image {
-    position: relative;
-}
-
-.coach-image img {
-    width: 100%;
-    border-radius: 20px;
-    box-shadow: 0 0 0 5px rgba(255, 179, 71, 0.5), 0 0 0 12px rgba(220, 47, 2, 0.3);
-    transition: 0.5s;
-}
-
-.coach-image:hover img {
-    transform: scale(1.02);
-}
-
-.golden-frame {
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    border: 2px solid var(--royal-gold);
-    border-radius: 25px;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        opacity: 0.5;
-    }
-    50% {
-        opacity: 1;
-    }
-}
-
-.coach-name {
-    font-size: 3rem;
-    font-family: 'Orbitron', monospace;
-    color: var(--royal-gold);
-}
-
-.coach-title {
-    color: var(--ember);
-    margin: 1rem 0;
-    font-size: 1.2rem;
-}
-
-.quote-carousel {
-    background: rgba(0, 0, 0, 0.5);
-    padding: 1.5rem;
-    border-radius: 15px;
-    margin: 1.5rem 0;
-    font-style: italic;
-    text-align: center;
-    transition: opacity 0.3s;
-}
-
-.badges {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin: 1.5rem 0;
-}
-
-.badge {
-    background: linear-gradient(135deg, var(--inferno), var(--ember));
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    font-size: 0.9rem;
-}
-
-@media (max-width: 768px) {
-    .coach-container {
-        grid-template-columns: 1fr;
-    }
-    .coach-name {
-        font-size: 2rem;
-    }
-    .section-title {
-        font-size: 2rem;
-    }
+    .hero-content { z-index: 2; animation: fadeInUp 1s ease; }
     .hero h1 {
-        font-size: 3rem;
+      font-size: 6rem;
+      font-family: 'Orbitron', monospace;
+      font-weight: 900;
+      background: linear-gradient(135deg, #fff, var(--royal-gold), var(--inferno));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: flameText 2s infinite alternate;
     }
-}
 
-/* Players Grid */
-.players-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.player-card {
-    background: linear-gradient(145deg, #141414, #1E1E1E);
-    border-radius: 20px;
-    overflow: hidden;
-    transition: 0.4s;
-    cursor: pointer;
-    position: relative;
-}
-
-.player-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(220, 47, 2, 0.3);
-}
-
-.player-img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    transition: 0.5s;
-    background: #222;
-}
-
-.player-card:hover .player-img {
-    transform: scale(1.1);
-}
-
-.player-info {
-    padding: 1.5rem;
-    text-align: center;
-}
-
-.player-name {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.player-number {
-    font-size: 19px;
-    color: var(--royal-gold);
-    font-weight: bold;
-}
-
-/* Stats Hub */
-.stats-hub {
-    background: linear-gradient(135deg, #0F0F0F, #080808);
-    border-radius: 30px;
-    padding: 3rem;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 2rem;
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.stat-item {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 1.5rem;
-    border-radius: 20px;
-}
-
-.stat-number {
-    font-size: 3.5rem;
-    font-weight: bold;
-    background: linear-gradient(135deg, var(--royal-gold), var(--ember));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-.form-badges {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 1rem;
-}
-
-.form-badge {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-weight: bold;
-}
-
-.form-win {
-    background: #28a745;
-}
-
-.form-draw {
-    background: #ffc107;
-    color: #000;
-}
-
-.form-loss {
-    background: #dc3545;
-}
-
-/* Gallery Masonry */
-.gallery-masonry {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-}
-
-.gallery-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 15px;
-    cursor: pointer;
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    transition: 0.5s;
-    background: #222;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.1);
-}
-
-.gallery-overlay {
-    position: absolute;
-    bottom: -100%;
-    left: 0;
-    right: 0;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
-    padding: 1rem;
-    transition: 0.3s;
-}
-
-.gallery-item:hover .gallery-overlay {
-    bottom: 0;
-}
-
-/* Footer */
-footer {
-    background: #050505;
-    padding: 3rem 5%;
-    text-align: center;
-    border-top: 1px solid rgba(255, 179, 71, 0.3);
-}
-
-/* Notification */
-.notification {
-    position: fixed;
-    top: 80px;
-    right: 20px;
-    background: linear-gradient(135deg, #28a745, #20c997);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 10px;
-    z-index: 2000;
-    animation: slideIn 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    font-weight: 500;
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
+    @keyframes flameText {
+      0% { text-shadow: 0 0 20px rgba(220, 47, 2, 0.5); }
+      100% { text-shadow: 0 0 40px rgba(255, 179, 71, 0.8); }
     }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+    .tagline { font-size: 1.5rem; margin: 1.5rem 0; min-height: 80px; }
+    .typed-text { border-right: 2px solid var(--royal-gold); padding-right: 5px; }
 
- </style>
+    .btn-cta {
+      background: linear-gradient(90deg, var(--inferno), var(--ember));
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-cta:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(220, 47, 2, 0.8); }
+    .scroll-indicator { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); animation: bounce 2s infinite; cursor: pointer; }
+
+    @keyframes bounce { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(10px); } }
+
+    /* Section Styles */
+    section { padding: 100px 5%; position: relative; }
+    .container { max-width: 1400px; margin: 0 auto; }
+
+    /* Coach Section */
+    .coach-section { background: linear-gradient(135deg, #0F0F0F, #1A1A1A); position: relative; overflow: hidden; }
+    .coach-container { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .coach-image { position: relative; }
+    .coach-image img { width: 100%; border-radius: 20px; box-shadow: 0 0 0 5px rgba(255, 179, 71, 0.5), 0 0 0 12px rgba(220, 47, 2, 0.3); transition: 0.5s; }
+    .coach-image:hover img { transform: scale(1.02); }
+    .golden-frame {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border: 2px solid var(--royal-gold);
+      border-radius: 25px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{ opacity: 0.5; } 50%{ opacity: 1; } }
+
+    .coach-name { font-size: 3rem; font-family: 'Orbitron', monospace; color: var(--royal-gold); }
+    .coach-title { color: var(--ember); margin: 1rem 0; font-size: 1.2rem; }
+    .quote-carousel { background: rgba(0, 0, 0, 0.5); padding: 1.5rem; border-radius: 15px; margin: 1.5rem 0; font-style: italic; text-align: center; transition: opacity 0.3s; }
+    .badges { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1.5rem 0; }
+    .badge { background: linear-gradient(135deg, var(--inferno), var(--ember)); padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.9rem; }
+
+    @media (max-width: 768px) {
+      .coach-container { grid-template-columns: 1fr; }
+      .coach-name { font-size: 2rem; }
+      .section-title { font-size: 2rem; }
+      .hero h1 { font-size: 3rem; }
+    }
+
+    /* Players Grid */
+    .players-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .player-card {
+      background: linear-gradient(145deg, #141414, #1E1E1E);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: 0.4s;
+      cursor: pointer;
+      position: relative;
+    }
+    .player-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 40px rgba(220, 47, 2, 0.3); }
+    .player-img { width: 100%; height: 300px; object-fit: cover; transition: 0.5s; background: #222; display: block; }
+    .player-card:hover .player-img { transform: scale(1.1); }
+    .player-info { padding: 1.5rem; text-align: center; }
+    .player-name { font-size: 1.5rem; font-weight: bold; }
+    .player-number { font-size: 19px; color: var(--royal-gold); font-weight: bold; }
+
+    /* Stats Hub */
+    .stats-hub { background: linear-gradient(135deg, #0F0F0F, #080808); border-radius: 30px; padding: 3rem; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem; text-align: center; margin-bottom: 3rem; }
+    .stat-item { background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 20px; }
+    .stat-number { font-size: 3.5rem; font-weight: bold; background: linear-gradient(135deg, var(--royal-gold), var(--ember)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .form-badges { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem; }
+    .form-badge { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; }
+    .form-win { background: #28a745; }
+    .form-draw { background: #ffc107; color: #000; }
+    .form-loss { background: #dc3545; }
+
+    /* Gallery Masonry */
+    .gallery-masonry { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+    .gallery-item { position: relative; overflow: hidden; border-radius: 15px; cursor: pointer; }
+    .gallery-item img { width: 100%; height: 250px; object-fit: cover; transition: 0.5s; background: #222; display: block; }
+    .gallery-item:hover img { transform: scale(1.1); }
+    .gallery-overlay {
+      position: absolute;
+      bottom: -100%;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+      padding: 1rem;
+      transition: 0.3s;
+      text-align: center;
+      font-weight: bold;
+    }
+    .gallery-item:hover .gallery-overlay { bottom: 0; }
+
+    /* Footer */
+    footer { background: #050505; padding: 3rem 5%; text-align: center; border-top: 1px solid rgba(255, 179, 71, 0.3); }
+
+    /* Notification */
+    .notification {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      background: linear-gradient(135deg, #28a745, #20c997);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 10px;
+      z-index: 2000;
+      animation: slideIn 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      font-weight: 500;
+    }
+    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
 </head>
 <body>
 
+<!-- Custom Cursor Element -->
 <div class="custom-cursor"></div>
 <div class="particle-container" id="particleContainer"></div>
 
-<!-- Navigation with Logo -->
+<!-- Navigation -->
 <nav class="nav-bar">
   <div class="logo-container">
     <div class="team-logo">
-      <img src="./images/logo.png" alt="Agnirox FC Logo" border="0" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+      <img src="logo.png" alt="Agnirox FC Logo">
     </div>
     <div class="logo">AGNIROX FC</div>
   </div>
@@ -743,27 +448,26 @@ footer {
     <div class="tagline">
       <span class="typed-text" id="typedText"></span>
     </div>
-    <button class="btn-cta" onclick="document.getElementById('players').scrollIntoView({behavior:'smooth'})"> JOIN OUR TEAM</button>
+    <button class="btn-cta" onclick="document.getElementById('players').scrollIntoView({behavior:'smooth'})">⚡ JOIN OUR TEAM ⚡</button>
   </div>
-  <div class="scroll-indicator">▼</div>
+  <div class="scroll-indicator" onclick="document.getElementById('coach').scrollIntoView({behavior:'smooth'})">▼</div>
 </section>
 
-<!-- Coach Section - Emotional Core -->
+<!-- Coach Section -->
 <section class="coach-section" id="coach">
   <div class="container">
     <h2 class="section-title">THE LEGEND ON THE TEAM</h2>
     <div class="coach-container">
       <div class="coach-image">
         <div class="golden-frame"></div>
-        <img src="./images/biswa1.jpg" alt="biswa da1" border="0" style="width: 100%; height: 100%; object-fit: cover;">
+        <img src="biswa1.jpg"
+             alt="Biswarup Adhikary">
       </div>
       <div class="coach-info">
         <h3 class="coach-name">Biswarup Adhikary (Biswa Daa)</h3>
-        <div class="coach-title">🔥PLAYER • PRINCIPAL SPONSOR • HEAD COACH • MENTOR 🔥</div>
+        <div class="coach-title">🔥 PLAYER • PRINCIPAL SPONSOR • HEAD COACH • MENTOR 🔥</div>
         <p style="line-height: 1.8; margin: 1rem 0;">"From ashes to glory — Biswa Daa didn't just sponsor this club; he rebuilt it with his bare hands. A visionary who saw fire where others saw failure. As our coach and our Captain, he shaped raw talent into warriors. As our mentor, he forged unbreakable spirits. Agnirox FC isn't just a team — it's his legacy, his family, his masterpiece."</p>
-        <div class="quote-carousel" id="quoteCarousel">
-          🔥 "Passion burns eternal." 🔥
-        </div>
+        <div class="quote-carousel" id="quoteCarousel">🔥 "Passion burns eternal." 🔥</div>
         <div class="badges">
           <span class="badge">🏆 2x RPL Runner-up Captain</span>
           <span class="badge">⭐ 15+ Years of Dedication</span>
@@ -781,7 +485,7 @@ footer {
     <h2 class="section-title">OUR LEGACY</h2>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
       <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 20px;">
-        <h3 style="color: var(--royal-gold);">Founded 2025</h3><br>
+        <h3 style="color: var(--royal-gold);">🔥 Founded 2025</h3><br>
         <p>Born in the heart of the city, Agnirox FC rose from humble beginnings to become a symbol of excellence and passion.</p>
       </div>
       <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 20px;">
@@ -789,8 +493,7 @@ footer {
         <p>To ignite champions, inspire communities, and leave a legacy of fire that burns for generations.</p>
       </div>
       <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 20px;">
-        <h3 style="color: var(--royal-gold);">🏆 Achievements</h3>
-        <br>
+        <h3 style="color: var(--royal-gold);">🏆 Achievements</h3><br>
         <p>3 RPL League Titles • 15+ match Victories • 1 Home match defeat • 50+ Goals Scored</p>
       </div>
     </div>
@@ -801,8 +504,23 @@ footer {
 <section id="players">
   <div class="container">
     <h2 class="section-title">MEMBERS OF THE TEAM</h2>
-    <div class="players-grid" id="playersGrid"></div>
-  </div>
+    <div class="players-grid">
+      <div class="player-card" onclick="alert('🔥 Biswarup Adhikary ')"><img class="player-img" src="biswa2.jpg"><div class="player-info"><h3 class="player-name">Biswarup Adhikary</h3><div class="player-number">Core member</div></div></div>
+      <div class="player-card" onclick="alert('🔥 Debopriyo Maji ')"><img class="player-img" src="debopriyo.png"><div class="player-info"><h3 class="player-name">Debopriyo Maji</h3><div class="player-number">Core member</div></div></div>
+      <div class="player-card" onclick="alert('🔥 Akash Nil Maji ')"><img class="player-img" src="akash.jpg"><div class="player-info"><h3 class="player-name">Akash Nil Maji</h3><div class="player-number">Core member</div></div></div>
+      <div class="player-card" onclick="alert('🔥 Rudra Pratap Maji ')"><img class="player-img" src="rudra.jpg"><div class="player-info"><h3 class="player-name">Rudra Pratap Maji</h3><div class="player-number">Core member</div></div></div>
+      <div class="player-card" onclick="alert('🔥 Ishan Sengupta ')"><img class="player-img" src="ishan.jpg"><div class="player-info"><h3 class="player-name">Ishan Sengupta</h3><div class="player-number">Core member</div></div></div>
+      <div class="player-card" onclick="alert('🔥 Abhinav Chatterjee ')"><img class="player-img" src="abhinav.jpg"><div class="player-info"><h3 class="player-name">Abhinav Chatterjee</h3><div class="player-number">Core member</div></div></div>
+      <div class="player-card" onclick="alert('🔥 Veer ')"><img class="player-img" src="veer.jpg"><div class="player-info"><h3 class="player-name">Veer</h3><div class="player-number">Core member</div></div></div>
+      <div class="player-card" onclick="alert('🔥 Soumil Roy ')"><img class="player-img" src="soumil.jpg"><div class="player-info"><h3 class="player-name">Soumil Roy</h3><div class="player-number">Core member</div></div></div>
+      <div class="player-card" onclick="alert('🔥 Anirudha Maji ')"><img class="player-img" src="anirudha.jpg"><div class="player-info"><h3 class="player-name">Anirudha Maji</h3><div class="player-number">Core member</div></div></div>
+      <div class="player-card" onclick="alert('🔥 Sidharth Kumar ')"><img class="player-img" src="sid.jpg"><div class="player-info"><h3 class="player-name">Sidharth Kumar</h3><div class="player-number">Core member</div></div></div>
+      <div class="player-card" onclick="alert('🔥 Ayush Ghosh Dostidar ')"><img class="player-img" src="ayush.jpg"><div class="player-info"><h3 class="player-name">Ayush Ghosh Dostidar</h3><div class="player-number">Core member</div></div></div>
+      <div class="player-card" onclick="alert('🔥 Koustav Mondal ')"><img class="player-img" src="koustav.jpg"><div class="player-info"><h3 class="player-name">Koustav Mondal</h3><div class="player-number">Core member</div></div></div>
+      <div class="player-card" onclick="alert('🔥 Snehank Bhattacharjee')"><img class="player-img" src="bubun.jpg"><div class="player-info"><h3 class="player-name">Snehank Bhattacharjee</h3><div class="player-number">Core member</div></div></div>
+      <div class="player-card" onclick="alert('🔥 Suvo')"><img class="player-img" src="suvo.jpg"><div class="player-info"><h3 class="player-name">Suvo</h3><div class="player-number">Core member</div></div></div>
+      <div class="player-card" onclick="alert('🔥 Atanu ')"><img class="player-img" src="atanu.jpg"><div class="player-info"><h3 class="player-name">Atanu</h3><div class="player-number">Core member</div></div></div>
+      <div class="player-card" onclick="alert('🔥 Sayan ')"><img class="player-img" src="suvo.jpg"><div class="player-info"><h3 class="player-name">Sayan</h3><div class="player-number">Core member</div></div></div>
 </section>
 
 <!-- Statistics Hub -->
@@ -810,14 +528,16 @@ footer {
   <div class="container">
     <h2 class="section-title">DOMINATION STATS</h2>
     <div class="stats-hub">
-      <div class="stats-grid" id="statsGrid">
-        <div class="stat-item"><div class="stat-number" id="matchesPlayed">24</div><div>Matches Played</div></div>
-        <div class="stat-item"><div class="stat-number" id="winsCount">18</div><div>Wins</div></div>
-        <div class="stat-item"><div class="stat-number" id="drawsCount">3</div><div>Draws</div></div>
-        <div class="stat-item"><div class="stat-number" id="lossesCount">3</div><div>Losses</div></div>
-        <div class="stat-item"><div class="stat-number" id="goalsScored">35</div><div>Goals Scored</div></div>
+      <div class="stats-grid">
+        <div class="stat-item"><div class="stat-number">24</div><div>Matches Played</div></div>
+        <div class="stat-item"><div class="stat-number">18</div><div>Wins</div></div>
+        <div class="stat-item"><div class="stat-number">3</div><div>Draws</div></div>
+        <div class="stat-item"><div class="stat-number">3</div><div>Losses</div></div>
+        <div class="stat-item"><div class="stat-number">35</div><div>Goals Scored</div></div>
       </div>
-      <div class="form-badges" id="formBadges"></div>
+      <div class="form-badges">
+        <div class="form-badge form-win">W</div><div class="form-badge form-win">W</div><div class="form-badge form-draw">D</div><div class="form-badge form-win">W</div><div class="form-badge form-loss">L</div>
+      </div>
     </div>
   </div>
 </section>
@@ -826,7 +546,26 @@ footer {
 <section id="gallery">
   <div class="container">
     <h2 class="section-title">ETERNAL MOMENTS</h2>
-    <div class="gallery-masonry" id="galleryGrid"></div>
+    <div class="gallery-masonry">
+      <div class="gallery-item"><img src="1.jpg" alt="" srcset=""><div class="gallery-overlay">Moments....</div></div>
+      <div class="gallery-item"><img src="2.jpg" alt="" srcset=""><div class="gallery-overlay">Moments....</div></div>
+      <div class="gallery-item"><img src="3.jpg" alt="" srcset=""><div class="gallery-overlay">Moments....</div></div>
+      <div class="gallery-item"><img src="4.jpg" alt="" srcset=""><div class="gallery-overlay">Moments....</div></div>
+      <div class="gallery-item"><img src="5.jpg" alt="" srcset=""><div class="gallery-overlay">Moments....</div></div>
+      <div class="gallery-item"><img src="6.jpg" alt="" srcset=""><div class="gallery-overlay">Moments....</div></div>
+      <div class="gallery-item"><img src="7.jpg" alt="" srcset=""><div class="gallery-overlay">Moments....</div></div>
+      <div class="gallery-item"><img src="8.jpg" alt="" srcset=""><div class="gallery-overlay">Moments....</div></div>
+      <div class="gallery-item"><img src="9.jpg" alt="" srcset=""><div class="gallery-overlay">Moments....</div></div>
+      <div class="gallery-item"><img src="10.jpg" alt="" srcset=""><div class="gallery-overlay">Moments....</div></div>
+      <div class="gallery-item"><img src="11.jpg" alt="" srcset=""><div class="gallery-overlay">Moments....</div></div>
+      <div class="gallery-item"><img src="12.jpg" alt="" srcset=""><div class="gallery-overlay">Moments....</div></div>
+      <div class="gallery-item"><img src="13.jpg" alt="" srcset=""><div class="gallery-overlay">Moments....</div></div>
+      <div class="gallery-item"><img src="14.jpg" alt="" srcset=""><div class="gallery-overlay">Moments....</div></div>
+      <div class="gallery-item"><img src="15.jpg" alt="" srcset=""><div class="gallery-overlay">Moments....</div></div>
+      <div class="gallery-item"><img src="16.jpg" alt="" srcset=""><div class="gallery-overlay">Moments....</div></div>
+      <div class="gallery-item"><img src="17.jpg" alt="" srcset=""><div class="gallery-overlay">Moments....</div></div>
+      
+    </div>
   </div>
 </section>
 
@@ -835,8 +574,9 @@ footer {
   <div class="container">
     <h2 class="section-title">CONNECT WITH US</h2>
     <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; background: linear-gradient(135deg, #111, #1A1A1A); padding: 3rem; border-radius: 30px;">
-      <div>Instagram: @agnirox_fc</div>
+      <div> Instagram: @agnirox_fc</div>
       <div>📍 Asansol Chitra Radhanagar</div>
+      <div>📧 agniroxfc@gmail.com</div>
     </div>
   </div>
 </section>
@@ -846,198 +586,96 @@ footer {
 </footer>
 
 <script>
-try {
-  console.log('🔥 Script initialized');
-
-  // ========== PLAYER DATA ==========
-  const players = [
-    { name: "Biswarup Adhikary", img:"biswa2.jpg" },
-    { name: "Debopriyo Maji", img: "debopriyo.png" },
-    { name: "Akash Nil Maji", img: "akash.jpg" },
-    { name: "Rudra Pratap Maji", img: "rudra.jpg" },
-    { name: "Ishan Sengupta", img: "ishan.jpg" },
-    { name: "Abhinav Chatterjee", img: "abhinav.jpg" },
-    { name: "Veer", img: "veer.jpg" },
-    { name: "Soumil Roy", img: "soumil.jpg" },
-    { name: "Ayush Ghosh Dostidar", img: "ayush.jpg" },
-    { name: "Koustav Mondal", img: "koustav.jpg" },
-    { name: "Sidharth Kumar", img: "sid.jpg" },
-    { name: "Anirudha Maji", img: "anirudha.jpg" },
-    { name: "Atanu", img: "atanu.jpg" },
-    { name: "Suvo", img: "suvo.jpg" },
-    { name: "Snehank Bhattacharjee", img: "bubun.jpg" },
-    { name: "Sayan"}
-  ];
-
-  // ========== GALLERY IMAGES ==========
-  const galleryImages = [
-    "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg",
-    "9.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg"
-  ];
-
-  // ========== RENDER PLAYERS ==========
-  function renderPlayers() {
-    try {
-      const grid = document.getElementById('playersGrid');
-      if (!grid) {
-        console.error('Players grid not found');
-        return;
+  (function() {
+    // ========== CUSTOM CURSOR FOLLOW (RED DOT WORKING) ==========
+    const cursor = document.querySelector('.custom-cursor');
+    if (cursor && window.innerWidth > 768) {
+      let mouseX = 0, mouseY = 0;
+      let cursorX = 0, cursorY = 0;
+      
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+      
+      function animateCursor() {
+        cursorX += (mouseX - cursorX) * 0.2;
+        cursorY += (mouseY - cursorY) * 0.2;
+        cursor.style.transform = `translate(${cursorX - 12}px, ${cursorY - 12}px)`;
+        requestAnimationFrame(animateCursor);
       }
+      animateCursor();
       
-      grid.innerHTML = players.map(p => `
-        <div class="player-card" onclick="showPlayerProfile('${p.name}')">
-          <img class="player-img" src="./images/${p.img || ''}" alt="${p.name}">
-          <div class="player-info">
-            <h3 class="player-name">${p.name}</h3>
-            <div class="player-number">Core member</div>
-          </div>
-        </div>
-      `).join('');
+      // Add hover effect on clickable elements
+      const clickableElements = document.querySelectorAll('a, button, .player-card, .gallery-item, .btn-cta, .scroll-indicator, .nav-links a');
+      clickableElements.forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+      });
       
-      console.log('✅ Players rendered:', players.length);
-    } catch (e) {
-      console.error('Error rendering players:', e);
+      // Click effect
+      document.addEventListener('mousedown', () => {
+        cursor.style.transform = `translate(${cursorX - 12}px, ${cursorY - 12}px) scale(0.7)`;
+      });
+      document.addEventListener('mouseup', () => {
+        cursor.style.transform = `translate(${cursorX - 12}px, ${cursorY - 12}px) scale(1)`;
+      });
+    } else if (cursor && window.innerWidth <= 768) {
+      cursor.style.display = 'none';
     }
-  }
 
-  // ========== RENDER GALLERY ==========
-  function renderGallery() {
-    try {
-      const grid = document.getElementById('galleryGrid');
-      if (!grid) {
-        console.error('Gallery grid not found');
-        return;
-      }
-      
-      grid.innerHTML = galleryImages.map((img, idx) => `
-        <div class="gallery-item">
-          <img src="./images/${img}" alt="Gallery image ${idx + 1}">
-          <div class="gallery-overlay">🔥 Glory Moment 🔥</div>
-        </div>
-      `).join('');
-      
-      console.log('✅ Gallery rendered:', galleryImages.length);
-    } catch (e) {
-      console.error('Error rendering gallery:', e);
-    }
-  }
-
-  // ========== UPDATE STATS ==========
-  function updateStatsDisplay() {
-    try {
-      const stats = {
-        played: 24,
-        wins: 18,
-        draws: 3,
-        losses: 3,
-        goals: 35
-      };
-
-      document.getElementById('matchesPlayed').textContent = stats.played;
-      document.getElementById('winsCount').textContent = stats.wins;
-      document.getElementById('drawsCount').textContent = stats.draws;
-      document.getElementById('lossesCount').textContent = stats.losses;
-      document.getElementById('goalsScored').textContent = stats.goals;
-      
-      updateFormDisplay(stats);
-      console.log('✅ Stats updated');
-    } catch (e) {
-      console.error('Error updating stats:', e);
-    }
-  }
-
-  function updateFormDisplay(stats) {
-    try {
-      const formContainer = document.getElementById('formBadges');
-      if (!formContainer) return;
-      
-      let form = [];
-      const winRate = stats.wins / (stats.played || 1);
-      const drawRate = stats.draws / (stats.played || 1);
-      
-      for (let i = 0; i < 5; i++) {
-        if (i < Math.round(winRate * 5)) {
-          form.push('W');
-        } else if (i < Math.round((winRate + drawRate) * 5)) {
-          form.push('D');
+    // ========== TYPING EFFECT ==========
+    const taglines = ["Fueled by Fire.", "Driven by Passion.", "Built for Glory.", "Rise Like Phoenix."];
+    let tagIdx = 0, charIdx = 0, isDel = false;
+    const typedSpan = document.getElementById('typedText');
+    if (typedSpan) {
+      function typeEffect() {
+        const current = taglines[tagIdx];
+        if (isDel) {
+          typedSpan.textContent = current.substring(0, charIdx - 1);
+          charIdx--;
         } else {
-          form.push('L');
+          typedSpan.textContent = current.substring(0, charIdx + 1);
+          charIdx++;
         }
+        if (!isDel && charIdx === current.length) { isDel = true; setTimeout(typeEffect, 2000); return; }
+        if (isDel && charIdx === 0) { isDel = false; tagIdx = (tagIdx + 1) % taglines.length; setTimeout(typeEffect, 500); return; }
+        setTimeout(typeEffect, isDel ? 50 : 100);
       }
-      
-      formContainer.innerHTML = form.map(f => 
-        `<div class="form-badge ${f === 'W' ? 'form-win' : f === 'D' ? 'form-draw' : 'form-loss'}">${f}</div>`
-      ).join('');
-    } catch (e) {
-      console.error('Error updating form:', e);
+      typeEffect();
     }
-  }
 
-  // ========== PLAYER PROFILE ==========
-  window.showPlayerProfile = function(name) {
-    alert(`🔥 ${name} 🔥\n\nA true warrior of Agnirox FC!`);
-  };
-
-  // ========== TYPING EFFECT ==========
-  const taglines = ["Fueled by Fire.", "Driven by Passion.", "Built for Glory.", "Rise Like Phoenix."];
-  let taglineIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
-  
-  function typeEffect() {
-    const typedTextElement = document.getElementById('typedText');
-    if (!typedTextElement) return;
-    
-    const currentTagline = taglines[taglineIndex];
-    if(isDeleting) {
-      typedTextElement.textContent = currentTagline.substring(0, charIndex - 1);
-      charIndex--;
-    } else {
-      typedTextElement.textContent = currentTagline.substring(0, charIndex + 1);
-      charIndex++;
-    }
-    if(!isDeleting && charIndex === currentTagline.length) {
-      isDeleting = true;
-      setTimeout(typeEffect, 2000);
-      return;
-    }
-    if(isDeleting && charIndex === 0) {
-      isDeleting = false;
-      taglineIndex = (taglineIndex + 1) % taglines.length;
-      setTimeout(typeEffect, 500);
-      return;
-    }
-    setTimeout(typeEffect, isDeleting ? 50 : 100);
-  }
-
-  // ========== QUOTE CAROUSEL ==========
-  const quotes = [
-    '🔥 "Passion burns eternal." 🔥',
-    '⚡ "Train like beasts. Play like legends." ⚡',
-    '🏆 "In fire, we trust." 🏆',
-    '💪 "Believe. Conquer. Rise." 💪'
-  ];
-  let quoteIndex = 0;
-  let quoteInterval = null;
-
-  function startQuoteCarousel() {
+    // ========== QUOTE CAROUSEL ==========
+    const quotesArr = ['🔥 "Passion burns eternal." 🔥', '⚡ "Train like beasts. Play like legends." ⚡', '🏆 "In fire, we trust." 🏆', '💪 "Believe. Conquer. Rise." 💪'];
+    let qIdx = 0;
     const quoteEl = document.getElementById('quoteCarousel');
-    if (!quoteEl) return;
-    
-    if (quoteInterval) clearInterval(quoteInterval);
-    
-    quoteInterval = setInterval(() => {
-      quoteIndex = (quoteIndex + 1) % quotes.length;
-      quoteEl.style.opacity = '0';
-      setTimeout(() => {
-        quoteEl.textContent = quotes[quoteIndex];
-        quoteEl.style.opacity = '1';
-      }, 300);
-    }, 4000);
-  }
+    if (quoteEl) {
+      setInterval(() => {
+        qIdx = (qIdx + 1) % quotesArr.length;
+        quoteEl.style.opacity = '0';
+        setTimeout(() => {
+          quoteEl.textContent = quotesArr[qIdx];
+          quoteEl.style.opacity = '1';
+        }, 300);
+      }, 4000);
+    }
 
-  // ========== MOBILE MENU ==========
-  try {
+    // ========== PARTICLE SYSTEM ==========
+    const particleContainer = document.getElementById('particleContainer');
+    if (particleContainer) {
+      for (let i = 0; i < 50; i++) {
+        let p = document.createElement('div');
+        p.classList.add('particle');
+        p.style.width = Math.random() * 5 + 2 + 'px';
+        p.style.height = p.style.width;
+        p.style.left = Math.random() * 100 + '%';
+        p.style.animationDuration = Math.random() * 5 + 3 + 's';
+        p.style.animationDelay = Math.random() * 10 + 's';
+        particleContainer.appendChild(p);
+      }
+    }
+
+    // ========== MOBILE MENU ==========
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     if (menuToggle && navLinks) {
@@ -1046,54 +684,16 @@ try {
         link.onclick = () => navLinks.classList.remove('active');
       });
     }
-  } catch (e) {
-    console.error('Error setting up mobile menu:', e);
-  }
 
-  // ========== PARTICLE SYSTEM ==========
-  function createParticles() {
-    try {
-      const container = document.getElementById('particleContainer');
-      if (!container) return;
-      
-      for(let i = 0; i < 50; i++) {
-        const particle = document.createElement('div');
-        particle.classList.add('particle');
-        particle.style.width = Math.random() * 5 + 2 + 'px';
-        particle.style.height = particle.style.width;
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.animationDuration = Math.random() * 5 + 3 + 's';
-        particle.style.animationDelay = Math.random() * 10 + 's';
-        container.appendChild(particle);
-      }
-      console.log('✅ Particles created');
-    } catch (e) {
-      console.error('Error creating particles:', e);
-    }
-  }
-
-  // ========== INITIALIZE ==========
-  console.log('Starting initialization...');
-  createParticles();
-  renderPlayers();
-  renderGallery();
-  updateStatsDisplay();
-  typeEffect();
-  startQuoteCarousel();
-  console.log('🔥 All systems online!');
-
-  window.addEventListener('load', () => {
-    console.log('Page fully loaded');
-    const notification = document.createElement('div');
-    notification.className = 'notification';
-    notification.textContent = '🔥 Welcome to Agnirox FC! 🔥';
-    document.body.appendChild(notification);
-    setTimeout(() => notification.remove(), 3000);
-  });
-
-} catch (error) {
-  console.error('❌ Fatal error:', error);
-}
+    // ========== WELCOME NOTIFICATION ==========
+    window.addEventListener('load', () => {
+      const notif = document.createElement('div');
+      notif.className = 'notification';
+      notif.textContent = '🔥 Welcome to Agnirox FC! 🔥';
+      document.body.appendChild(notif);
+      setTimeout(() => notif.remove(), 3500);
+    });
+  })();
 </script>
 </body>
 </html>
