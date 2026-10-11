@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>AGNIROX · Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFFDF5; --ink:#000; --accent:#FF6B6B;
+    --secondary:#FFD93D; --muted:#C4B5FD; --ok:#86EFAC; --err:#FCA5A5;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Space Grotesk',system-ui,sans-serif;
+    background:var(--cream);color:var(--ink);
+    font-weight:700;font-size:16px;
+  }
+
+  /* ============ LOCK SCREEN ============ */
+  #lockScreen{
+    position:fixed;inset:0;z-index:1000;
+    background:var(--cream);
+    display:flex;align-items:center;justify-content:center;
+    padding:20px;
+  }
+  #lockScreen::before{
+    content:'';position:absolute;inset:0;
+    background-image:radial-gradient(var(--ink) 1.5px, transparent 1.5px);
+    background-size:24px 24px;opacity:.08;pointer-events:none;
+  }
+  .lock-card{
+    background:#fff;border:6px solid var(--ink);
+    box-shadow:14px 14px 0 0 var(--ink);
+    padding:40px 36px;max-width:420px;width:100%;
+    transform:rotate(-1.5deg);position:relative;z-index:1;
+  }
+  .lock-card h1{
+    font-weight:900;font-size:1.9rem;letter-spacing:-.03em;
+    text-transform:uppercase;line-height:1;margin-bottom:8px;
+  }
+  .lock-card h1 span{
+    background:var(--accent);border:3px solid var(--ink);
+    padding:2px 10px;display:inline-block;transform:rotate(-2deg);
+  }
+  .lock-card .sub{
+    font-weight:900;font-size:.68rem;letter-spacing:.22em;
+    text-transform:uppercase;color:#666;margin-bottom:28px;
+  }
+  .lock-card label{
+    display:block;font-weight:900;font-size:.68rem;
+    letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px;
+  }
+  .lock-card input{
+    width:100%;padding:16px;border:4px solid var(--ink);
+    background:var(--cream);font-family:inherit;font-weight:700;
+    font-size:1rem;margin-bottom:20px;
+  }
+  .lock-card input:focus{outline:none;background:var(--secondary)}
+  .lock-card button{
+    width:100%;padding:18px;border:4px solid var(--ink);
+    background:var(--accent);color:var(--ink);
+    font-family:inherit;font-weight:900;font-size:.9rem;
+    letter-spacing:.14em;text-transform:uppercase;cursor:pointer;
+    box-shadow:6px 6px 0 0 var(--ink);
+    transition:transform .1s, box-shadow .1s;
+  }
+  .lock-card button:active{transform:translate(6px,6px);box-shadow:0 0 0 0 var(--ink)}
+  .lock-card .err{
+    background:var(--err);border:3px solid var(--ink);
+    padding:10px 14px;font-weight:900;font-size:.72rem;
+    letter-spacing:.16em;text-transform:uppercase;
+    margin-bottom:16px;display:none;
+  }
+  .lock-card .err.on{display:block}
+  .lock-card .shake{animation:shake .35s}
+  @keyframes shake{
+    0%,100%{transform:translateX(0)}
+    25%{transform:translateX(-8px)}
+    75%{transform:translateX(8px)}
+  }
+  .lock-card .foot{
+    margin-top:22px;padding-top:18px;border-top:3px dashed var(--ink);
+    font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+    color:#777;line-height:1.7;text-align:center;
+  }
+
+  /* ============ PANEL (hidden until unlocked) ============ */
+  #panel{display:none;padding:24px 20px 130px}
+  #panel.unlocked{display:block}
+  .wrap{max-width:1100px;margin:0 auto}
+
+  .top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-bottom:24px}
+  .top h1{font-weight:900;font-size:1.85rem;letter-spacing:-.02em;text-transform:uppercase}
+  .top h1 span{background:var(--accent);border:3px solid var(--ink);padding:2px 10px;display:inline-block;transform:rotate(-2deg)}
+  .status{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;padding:8px 14px;border:3px solid var(--ink);background:#fff;box-shadow:4px 4px 0 0 var(--ink)}
+  .status.ok{background:var(--ok)}
+  .status.err{background:var(--err)}
+
+  .panel{
+    background:#fff;border:4px solid var(--ink);
+    box-shadow:8px 8px 0 0 var(--ink);
+    padding:24px;margin-bottom:24px;
+  }
+  .panel h2{
+    font-weight:900;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;
+    margin-bottom:20px;padding-bottom:12px;border-bottom:3px dashed var(--ink);
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .panel h2 .num{background:var(--secondary);border:3px solid var(--ink);padding:3px 10px;font-size:.7rem}
+
+  .grid{display:grid;gap:16px;grid-template-columns:1fr}
+  @media(min-width:700px){ .grid.cols-2{grid-template-columns:1fr 1fr} }
+  @media(min-width:900px){ .grid.cols-3{grid-template-columns:1fr 1fr 1fr} }
+
+  .field{display:flex;flex-direction:column;gap:6px}
+  .field label{
+    font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .field label .hint{font-size:.6rem;color:#888;letter-spacing:.1em;font-weight:600}
+  .field input,.field textarea,.field select{
+    width:100%;padding:12px 14px;border:3px solid var(--ink);background:var(--cream);
+    font-family:inherit;font-weight:700;font-size:.92rem;color:var(--ink);
+  }
+  .field input:focus,.field textarea:focus,.field select:focus{outline:none;background:var(--secondary)}
+  .field textarea{resize:vertical;min-height:80px;line-height:1.5}
+
+  .roster{display:flex;flex-direction:column;gap:12px}
+  .row{
+    display:grid;gap:10px;grid-template-columns:1fr;
+    padding:14px;border:3px solid var(--ink);background:var(--cream);
+  }
+  @media(min-width:700px){
+    .row.players{grid-template-columns:40px 1fr 1fr 130px 1fr 40px}
+    .row.scorers{grid-template-columns:1fr 100px 40px}
+    .row.chips{grid-template-columns:1fr 40px}
+    .row.gallery{grid-template-columns:1fr 40px}
+  }
+  .row .idx{
+    display:flex;align-items:center;justify-content:center;
+    background:var(--ink);color:var(--cream);border:2px solid var(--ink);
+    font-weight:900;font-size:.85rem;padding:10px 0;
+  }
+  .del{
+    width:40px;height:40px;border:3px solid var(--ink);background:var(--accent);
+    font-weight:900;font-size:1.1rem;cursor:pointer;
+    box-shadow:3px 3px 0 0 var(--ink);transition:transform .1s;
+  }
+  .del:active{transform:translate(3px,3px);box-shadow:0 0 0 0 var(--ink)}
+
+  .add{
+    padding:12px 18px;border:3px dashed var(--ink);background:#fff;
+    font-family:inherit;font-weight:900;font-size:.78rem;letter-spacing:.14em;
+    text-transform:uppercase;cursor:pointer;box-shadow:4px 4px 0 0 var(--ink);
+    transition:transform .1s;
+  }
+  .add:active{transform:translate(4px,4px);box-shadow:0 0 0 0 var(--ink)}
+
+  .footer{
+    position:fixed;bottom:0;left:0;right:0;z-index:50;
+    background:var(--ink);color:var(--cream);
+    padding:14px 20px;display:flex;justify-content:space-between;
+    align-items:center;gap:16px;flex-wrap:wrap;
+  }
+  .footer .info{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase}
+  .footer .actions{display:flex;gap:10px;flex-wrap:wrap}
+
+  .btn{
+    padding:12px 20px;border:3px solid var(--cream);background:var(--secondary);color:var(--ink);
+    font-family:inherit;font-weight:900;font-size:.78rem;letter-spacing:.14em;
+    text-transform:uppercase;cursor:pointer;
+    box-shadow:4px 4px 0 0 var(--accent);
+    transition:transform .1s, box-shadow .1s;
+  }
+  .btn:active{transform:translate(4px,4px);box-shadow:0 0 0 0 var(--accent)}
+  .btn.red{background:var(--accent);box-shadow:4px 4px 0 0 var(--secondary)}
+  .btn.red:active{transform:translate(4px,4px);box-shadow:0 0 0 0 var(--secondary)}
+  .btn.ghost{background:transparent;color:var(--cream);border:3px solid var(--cream);box-shadow:none}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+
+  .toast{
+    position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-120%);
+    background:var(--ink);color:var(--cream);border:4px solid var(--accent);
+    box-shadow:6px 6px 0 0 var(--accent);
+    padding:14px 22px;font-weight:900;font-size:.78rem;letter-spacing:.18em;
+    text-transform:uppercase;z-index:2000;transition:transform .3s;max-width:90vw;
+  }
+  .toast.on{transform:translateX(-50%) translateY(0)}
+  .toast.ok{border-color:var(--ok);box-shadow:6px 6px 0 0 var(--ok)}
+  .toast.err{border-color:var(--err);box-shadow:6px 6px 0 0 var(--err)}
+
+  .divider{height:0;border-top:3px dashed var(--ink);margin:20px 0}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     LOCK SCREEN — hides everything until password is correct
+     ============================================================ -->
+<div id="lockScreen">
+  <form class="lock-card" id="lockForm">
+    <h1>Agnirox <span>Admin</span></h1>
+    <div class="sub">◆ Authorised personnel only</div>
+    <div class="err" id="lockErr">✗ Wrong password</div>
+    <label for="pwInput">Password</label>
+    <input type="password" id="pwInput" autofocus required autocomplete="current-password">
+    <button type="submit">Unlock Panel →</button>
+    <div class="foot">
+      Agnirox FC · Est. 2025<br>Asansol · West Bengal
+    </div>
+  </form>
+</div>
+
+<!-- ============================================================
+     PANEL — rendered only after unlock
+     ============================================================ -->
+<div id="panel">
+<div class="wrap">
+
+  <div class="top">
+    <h1>Agnirox <span>Admin</span></h1>
+    <div class="status" id="status">● Ready</div>
+  </div>
+
+  <!-- HERO -->
+  <div class="panel">
+    <h2>Hero &amp; Scorecard <span class="num">01</span></h2>
+    <div class="grid cols-2">
+      <div class="field"><label>Match status</label><input id="hero.status"></div>
+      <div class="field"><label>Matchday</label><input id="hero.matchday"></div>
+    </div>
+    <div class="divider"></div>
+    <div class="grid cols-3">
+      <div class="field"><label>Home team</label><input id="hero.homeTeam"></div>
+      <div class="field"><label>Home short</label><input id="hero.homeShort"></div>
+      <div class="field"><label>Home score</label><input id="hero.homeScore"></div>
+    </div>
+    <div class="grid cols-3" style="margin-top:16px">
+      <div class="field"><label>Away team</label><input id="hero.awayTeam"></div>
+      <div class="field"><label>Away short</label><input id="hero.awayShort"></div>
+      <div class="field"><label>Away score</label><input id="hero.awayScore"></div>
+    </div>
+    <div class="divider"></div>
+    <div class="grid cols-3">
+      <div class="field">
+        <label>Result</label>
+        <select id="hero.result">
+          <option value="">—</option>
+          <option>Won</option>
+          <option>Lost</option>
+          <option>Draw</option>
+        </select>
+      </div>
+      <div class="field"><label>Minute</label><input id="hero.minute"></div>
+      <div class="field"><label>Ground</label><input id="hero.ground"></div>
+    </div>
+    <div class="field" style="margin-top:16px">
+      <label>Hero subtitle</label>
+      <textarea id="heroSub"></textarea>
+    </div>
+  </div>
+
+  <!-- MATCH REPORT -->
+  <div class="panel">
+    <h2>Match Report <span class="num">02</span></h2>
+    <div class="grid cols-2">
+      <div class="field"><label>Report title</label><input id="reportTitle"></div>
+      <div class="field"><label>Report tag</label><input id="report.tag"></div>
+    </div>
+    <div class="grid cols-2" style="margin-top:16px">
+      <div class="field"><label>Headline</label><input id="report.headline"></div>
+      <div class="field"><label>Matchday (report)</label><input id="report.matchday"></div>
+    </div>
+    <div class="field" style="margin-top:16px">
+      <label>Lead paragraph</label>
+      <textarea id="report.lead" style="min-height:140px"></textarea>
+    </div>
+    <div class="divider"></div>
+    <h2 style="border:0;padding:0;margin-bottom:12px">Scorers</h2>
+    <div class="roster" id="scorers"></div>
+    <button class="add" onclick="addScorer()" style="margin-top:12px" type="button">+ Add scorer</button>
+    <div class="divider"></div>
+    <div class="grid cols-2">
+      <div class="field"><label>MOTM — name</label><input id="report.motm.name"></div>
+      <div class="field"><label>MOTM — tag</label><input id="report.motm.tag"></div>
+    </div>
+    <div class="divider"></div>
+    <h2 style="border:0;padding:0;margin-bottom:12px">Chips / tags</h2>
+    <div class="roster" id="chips"></div>
+    <button class="add" onclick="addChip()" style="margin-top:12px" type="button">+ Add chip</button>
+  </div>
+
+  <!-- STATS -->
+  <div class="panel">
+    <h2>Season Numbers <span class="num">03</span></h2>
+    <div class="grid cols-3">
+      <div class="field"><label>Season</label><input id="season"></div>
+      <div class="field"><label>Played</label><input id="stats.played"></div>
+      <div class="field"><label>Won</label><input id="stats.won"></div>
+    </div>
+    <div class="grid cols-3" style="margin-top:16px">
+      <div class="field"><label>Drawn</label><input id="stats.drawn"></div>
+      <div class="field"><label>Lost</label><input id="stats.lost"></div>
+      <div class="field"><label>Goals</label><input id="stats.goals"></div>
+    </div>
+    <div class="field" style="margin-top:16px">
+      <label>Form <span class="hint">comma-separated, e.g. W,W,D,W,L</span></label>
+      <input id="stats.form">
+    </div>
+  </div>
+
+  <!-- SQUAD -->
+  <div class="panel">
+    <h2>Squad <span class="num">04</span></h2>
+    <div class="roster" id="players"></div>
+    <button class="add" onclick="addPlayer()" style="margin-top:12px" type="button">+ Add player</button>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="panel">
+    <h2>Gallery <span class="num">05</span></h2>
+    <div class="roster" id="gallery"></div>
+    <button class="add" onclick="addGallery()" style="margin-top:12px" type="button">+ Add image URL</button>
+  </div>
+
+</div>
+</div>
+
+<!-- FOOTER (only visible when unlocked) -->
+<div class="footer" id="footer" style="display:none">
+  <div class="info" id="footInfo">Ready</div>
+  <div class="actions">
+    <button class="btn ghost" onclick="loadContent()" type="button">Reload</button>
+    <button class="btn red" id="saveBtn" onclick="saveContent()" type="button">Save to Supabase ✓</button>
+  </div>
+</div>
+
+<div class="toast" id="toast">—</div>
+
+<script>
+(function(){
+  'use strict';
+
+  // ============================================================
+  // CONFIG — edit these two lines only
+  // ============================================================
+  const SUPABASE_URL  = 'https://qqimgqgkuoapaaegjlpt.supabase.co';
+  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFxaW1ncWdrdW9hcGFhZWdqbHB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE3MzA5MDIsImV4cCI6MjEwNzMwNjkwMn0.0fxipDU2eImKyaxkXXhTotSNFtv01ixMjAfwAzyac-g';
+  // ============================================================
+
+  // ============================================================
+  // DEFAULT DATA — what shows up in the panel when Supabase is empty
+  // ============================================================
+  const DEFAULT_DATA = {
+    "season": "2024–25",
+    "hero": {
+      "status": "Full Time",
+      "matchday": 24,
+      "homeTeam": "Agnirox",
+      "homeShort": "A",
+      "awayTeam": "Rivals",
+      "awayShort": "R",
+      "homeScore": 3,
+      "awayScore": 2,
+      "result": "Won",
+      "minute": "90+4'",
+      "ground": "Chitra Ground"
+    },
+    "stats": {
+      "played": 24,
+      "won": 18,
+      "drawn": 3,
+      "lost": 3,
+      "goals": 35,
+      "form": ["W","W","D","W","L"]
+    },
+    "reportTitle": "Last Sunday, 3–2.",
+    "heroSub": "Sixteen boys from the coal belt of Asansol. One mentor who refused to let them fade. No academy. No money. No shortcuts. Just a ground, a ball, and a promise to make the league uncomfortable.",
+    "report": {
+      "matchday": 24,
+      "tag": "Full Time · MD 24",
+      "headline": "Down 2–1 at the break. Won it in the 88th.",
+      "lead": "The Rivals thought they had us. Two quick goals against the run of play, half-time whistle, and our bench was silent for the first time all season. Then Biswa Daa moved Koustav up top, pulled Rudra into the pocket, and told the boys one thing: \"Whatever happens, keep the ball on the ground.\" Sixty-first minute, Koustav equalised. Eighty-eighth, Soumil — sixteen years old, first season — curled one in from the edge of the box and the whole ground lost it.",
+      "motm": { "name": "Ayush Ghosh Dostidar", "tag": "GK" },
+      "chips": [
+        { "label": "POSSESSION · 47%" },
+        { "label": "SHOTS · 14 (8 on target)" },
+        { "label": "CORNERS · 7" },
+        { "label": "YELLOWS · 3" }
+      ],
+      "scorers": [
+        { "minute": "23'", "name": "Rudra Pratap Maji", "type": "Open Play" },
+        { "minute": "61'", "name": "Koustav Mondal",     "type": "Open Play" },
+        { "minute": "88'", "name": "Soumil Roy",         "type": "Open Play" }
+      ]
+    },
+    "players": [
+      { "name": "Biswarup Adhikary",      "img": "https://i.ibb.co/Hftz2Fd6/biswa2.jpg",   "role": "Coach" },
+      { "name": "Debopriyo Maji",         "img": "https://i.ibb.co/pvc70VDp/debopriyo.png","role": "Mid"   },
+      { "name": "Akash Nil Maji",         "img": "https://i.ibb.co/23X1ZV2P/akash.jpg",    "role": "Def"   },
+      { "name": "Rudra Pratap Maji",      "img": "https://i.ibb.co/1tB5BD0Z/rudra.jpg",    "role": "Fwd"   },
+      { "name": "Ishan Sengupta",         "img": "https://i.ibb.co/WN1q3wGP/ishan.jpg",    "role": "Mid"   },
+      { "name": "Abhinav Chatterjee",     "img": "https://i.ibb.co/RGKQ9kPw/abhinav.jpg",  "role": "Def"   },
+      { "name": "Veer",                   "img": "https://i.ibb.co/0VWhT2ML/veer.jpg",     "role": "Fwd"   },
+      { "name": "Soumil Roy",             "img": "https://i.ibb.co/PZbKTM1z/soumil.jpg",   "role": "Mid"   },
+      { "name": "Anirudha Maji",          "img": "https://i.ibb.co/BK4WM51W/anirudha.jpg", "role": "Def"   },
+      { "name": "Sidharth Kumar",         "img": "https://i.ibb.co/xKgnC5Fq/sid.jpg",      "role": "GK"    },
+      { "name": "Ayush Ghosh Dostidar",   "img": "https://i.ibb.co/QF3shVv4/ayush.jpg",    "role": "GK"    },
+      { "name": "Koustav Mondal",         "img": "https://i.ibb.co/N26Hvd4B/koustav.jpg",  "role": "Fwd"   },
+      { "name": "Snehank Bhattacharjee",  "img": "https://i.ibb.co/GXHg1R1/bubun.jpg",     "role": "Mid"   },
+      { "name": "Suvo",                   "img": "https://i.ibb.co/b5v3xk19/suvo.jpg",     "role": "Def"   },
+      { "name": "Atanu",                  "img": "https://i.ibb.co/q3hcpxL0/atanu.jpg",    "role": "Mid"   },
+      { "name": "Sayan",                  "img": "https://i.ibb.co/b5v3xk19/suvo.jpg",     "role": "Def"   }
+    ],
+    "gallery": [
+      "https://i.ibb.co/XkJQG0Fr/1.jpg",
+      "https://i.ibb.co/F4ZtsM7m/2.jpg",
+      "https://i.ibb.co/BHpMJpd5/3.jpg",
+      "https://i.ibb.co/jPfR4Ln1/4.jpg",
+      "https://i.ibb.co/JjkWPnL4/5.jpg",
+      "https://i.ibb.co/CptPvY6L/6.jpg",
+      "https://i.ibb.co/9QxYvth/7.jpg",
+      "https://i.ibb.co/spnMHsqZ/8.jpg",
+      "https://i.ibb.co/JWsMtmt5/9.jpg",
+      "https://i.ibb.co/chDQ7j9T/10.jpg",
+      "https://i.ibb.co/1fybGbS6/11.jpg",
+      "https://i.ibb.co/GfzGg07J/12.jpg",
+      "https://i.ibb.co/KcG13z9p/13.jpg",
+      "https://i.ibb.co/zWrLXFPm/14.jpg",
+      "https://i.ibb.co/qLb7QPD5/15.jpg",
+      "https://i.ibb.co/fGHcbVmr/16.jpg",
+      "https://i.ibb.co/S7Z6FkdJ/17.jpg"
+    ]
+  };
+
+  // ============================================================
+  // SHORTCUTS
+  // ============================================================
+  const el = id => document.getElementById(id);
+  const headers = {
+    'apikey': SUPABASE_ANON,
+    'Authorization': `Bearer ${SUPABASE_ANON}`,
+    'Content-Type': 'application/json'
+  };
+
+  let unlocked = false;
+  let adminPassword = '';
+
+  // ---------- toast ----------
+  let toastTimer;
+  function toast(msg, type){
+    const t = el('toast');
+    t.textContent = msg;
+    t.className = 'toast on ' + (type || '');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('on'), 2800);
+  }
+  function status(msg, type){
+    const s = el('status');
+    s.textContent = '● ' + msg;
+    s.className = 'status ' + (type || '');
+  }
+
+  // ---------- path helpers ----------
+  function getPath(obj, path){
+    return path.split('.').reduce((o,k) => (o == null ? undefined : o[k]), obj);
+  }
+  function setPath(obj, path, val){
+    const keys = path.split('.');
+    let cur = obj;
+    keys.forEach((k,i) => {
+      if (i === keys.length - 1) cur[k] = val;
+      else { cur[k] = cur[k] || {}; cur = cur[k]; }
+    });
+  }
+
+  // ============================================================
+  // LOCK SCREEN — try password against Supabase RPC before unlocking
+  // ============================================================
+  const lockForm = el('lockForm');
+  const pwInput  = el('pwInput');
+  const lockErr  = el('lockErr');
+  const lockCard = document.querySelector('.lock-card');
+
+  lockForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const pw = pwInput.value;
+    if (!pw) return;
+
+    lockErr.classList.remove('on');
+    const btn = lockForm.querySelector('button');
+    const oldText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Checking…';
+
+    try {
+      // We verify by calling the write RPC with an empty object — if the password
+      // is wrong, Supabase raises an error and nothing is written.
+      // (The content stays exactly as it was because we send {} only on success.)
+      // Instead of writing, we do a lightweight probe:
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/update_content_with_password`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ p_password: pw, p_data: null }) // null → function raises, nothing saved
+      });
+
+      // If password wrong → error from function. If password correct → 200/204.
+      // Because we send p_data=null, Postgres rejects with a JSON parse error either way…
+      // so we need a cleaner check. Use a dedicated verify function below.
+      // For now, treat non-OK as wrong password.
+      if (!res.ok) throw new Error('bad');
+    } catch (_) {
+      // Ignore — handled by verifyPassword below
+    }
+
+    // Real verification via dedicated RPC (see schema.sql addition)
+    try {
+      const vres = await fetch(`${SUPABASE_URL}/rest/v1/rpc/verify_admin_password`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ p_password: pw })
+      });
+      if (!vres.ok) throw new Error('HTTP ' + vres.status);
+      const ok = await vres.json();
+      if (ok !== true) throw new Error('bad');
+
+      // success
+      adminPassword = pw;
+      unlocked = true;
+      openPanel();
+    } catch (_) {
+      lockErr.classList.add('on');
+      lockCard.classList.remove('shake');
+      void lockCard.offsetWidth;
+      lockCard.classList.add('shake');
+      pwInput.select();
+    } finally {
+      btn.disabled = false;
+      btn.textContent = oldText;
+    }
+  });
+
+  function openPanel(){
+    el('lockScreen').style.display = 'none';
+    el('panel').classList.add('unlocked');
+    el('footer').style.display = 'flex';
+    loadContent();
+  }
+
+  // ============================================================
+  // DYNAMIC ROWS
+  // ============================================================
+  function addScorer(data){
+    const box = el('scorers');
+    const row = document.createElement('div');
+    row.className = 'row scorers';
+    row.innerHTML = `
+      <input placeholder="Player name" data-k="name" value="${data?.name || ''}">
+      <input placeholder="45'" data-k="minute" value="${data?.minute || ''}">
+      <button class="del" type="button" onclick="this.parentNode.remove()">×</button>`;
+    box.appendChild(row);
+  }
+  function addChip(data){
+    const box = el('chips');
+    const row = document.createElement('div');
+    row.className = 'row chips';
+    row.innerHTML = `
+      <input placeholder="Chip label" data-k="label" value="${data?.label || ''}">
+      <button class="del" type="button" onclick="this.parentNode.remove()">×</button>`;
+    box.appendChild(row);
+  }
+  function addPlayer(data){
+    const box = el('players');
+    const row = document.createElement('div');
+    row.className = 'row players';
+    row.innerHTML = `
+      <div class="idx">${box.children.length + 1}</div>
+      <input placeholder="Name"            data-k="name" value="${data?.name || ''}">
+      <input placeholder="Role (GK/DEF…)"  data-k="role" value="${data?.role || ''}">
+      <input placeholder="Slot"            data-k="pos"  value="${data?.pos  || ''}">
+      <input placeholder="Image URL"       data-k="img"  value="${data?.img  || ''}">
+      <button class="del" type="button" onclick="this.parentNode.remove();renumber()">×</button>`;
+    box.appendChild(row);
+    renumber();
+  }
+  function addGallery(src){
+    const box = el('gallery');
+    const row = document.createElement('div');
+    row.className = 'row gallery';
+    row.innerHTML = `
+      <input placeholder="Image URL" value="${src || ''}">
+      <button class="del" type="button" onclick="this.parentNode.remove()">×</button>`;
+    box.appendChild(row);
+  }
+  function renumber(){
+    [...el('players').children].forEach((r,i) => {
+      r.querySelector('.idx').textContent = i + 1;
+    });
+  }
+
+  // expose to inline onclick
+  window.addScorer  = addScorer;
+  window.addChip    = addChip;
+  window.addPlayer  = addPlayer;
+  window.addGallery = addGallery;
+  window.renumber   = renumber;
+  window.loadContent = loadContent;
+  window.saveContent = saveContent;
+
+  // ============================================================
+  // PAINT UI FROM OBJECT
+  // ============================================================
+  const SIMPLE = [
+    'hero.status','hero.matchday','hero.homeTeam','hero.homeShort','hero.homeScore',
+    'hero.awayTeam','hero.awayShort','hero.awayScore','hero.result','hero.minute',
+    'hero.ground','heroSub','reportTitle','report.tag','report.headline','report.matchday',
+    'report.lead','report.motm.name','report.motm.tag','season',
+    'stats.played','stats.won','stats.drawn','stats.lost','stats.goals'
+  ];
+
+  function paint(D){
+    D = D || {};
+
+    SIMPLE.forEach(id => {
+      let v = getPath(D, id);
+      if (v === undefined || v === null) v = '';
+      if (Array.isArray(v)) v = v.join(',');
+      const node = el(id);
+      if (node) node.value = v;
+    });
+
+    // dynamic lists
+    el('scorers').innerHTML = '';
+    el('chips').innerHTML   = '';
+    el('players').innerHTML = '';
+    el('gallery').innerHTML = '';
+
+    (D.report?.scorers || []).forEach(addScorer);
+    (D.report?.chips   || []).forEach(addChip);
+    (D.players || []).forEach(addPlayer);
+    (D.gallery || []).forEach(addGallery);
+
+    updateFoot();
+  }
+
+  // ============================================================
+  // COLLECT UI INTO OBJECT
+  // ============================================================
+  function collect(){
+    const D = {};
+
+    SIMPLE.forEach(id => {
+      let v = (el(id)?.value || '').trim();
+      if (v === '') return;
+
+      if (/^(hero\.(homeScore|awayScore|matchday)|stats\.(played|won|drawn|lost|goals)|report\.matchday)$/.test(id)) {
+        const n = parseInt(v, 10);
+        if (!isNaN(n)) v = n;
+      }
+      setPath(D, id, v);
+    });
+
+    if (D.stats?.form && typeof D.stats.form === 'string'){
+      D.stats.form = D.stats.form.split(',').map(s => s.trim().toUpperCase()).filter(Boolean);
+    }
+
+    const scorers = [...el('scorers').querySelectorAll('.row')].map(r => {
+      const name = r.querySelector('[data-k="name"]').value.trim();
+      const minute = r.querySelector('[data-k="minute"]').value.trim();
+      return name ? { name, minute } : null;
+    }).filter(Boolean);
+    if (scorers.length){ D.report = D.report || {}; D.report.scorers = scorers; }
+
+    const chips = [...el('chips').querySelectorAll('.row')].map(r => {
+      const label = r.querySelector('[data-k="label"]').value.trim();
+      return label ? { label } : null;
+    }).filter(Boolean);
+    if (chips.length){ D.report = D.report || {}; D.report.chips = chips; }
+
+    const players = [...el('players').querySelectorAll('.row')].map(r => {
+      const g = k => r.querySelector(`[data-k="${k}"]`).value.trim();
+      return g('name') ? { name: g('name'), role: g('role'), pos: g('pos'), img: g('img') } : null;
+    }).filter(Boolean);
+    if (players.length) D.players = players;
+
+    const gallery = [...el('gallery').querySelectorAll('.row')]
+      .map(r => r.querySelector('input').value.trim())
+      .filter(Boolean);
+    if (gallery.length) D.gallery = gallery;
+
+    return D;
+  }
+
+  function updateFoot(){
+    const D = collect();
+    const fields = SIMPLE.filter(id => el(id)?.value.trim()).length;
+    const extras = (D.players?.length || 0) + (D.gallery?.length || 0)
+                 + (D.report?.scorers?.length || 0) + (D.report?.chips?.length || 0);
+    el('footInfo').textContent = `Ready · ${fields} fields · ${extras} list rows`;
+  }
+  document.addEventListener('input', updateFoot);
+
+  // ============================================================
+  // SUPABASE LOAD / SAVE
+  // ============================================================
+  async function loadContent(){
+    if (!unlocked) return;
+    status('Loading…');
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/content?id=eq.1&select=data`, { headers });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const rows = await res.json();
+      const remote = rows[0]?.data;
+
+      // If Supabase has nothing (empty object) → paint DEFAULT_DATA
+      if (!remote || Object.keys(remote).length === 0){
+        paint(DEFAULT_DATA);
+        status('Using defaults · not yet saved', '');
+        toast('Loaded defaults — press Save to publish', '');
+      } else {
+        paint(remote);
+        status('Connected · loaded', 'ok');
+        toast('Content loaded ✓', 'ok');
+      }
+    } catch (e){
+      // fallback to defaults on any fetch failure
+      paint(DEFAULT_DATA);
+      status('Offline · showing defaults', 'err');
+      toast('Load failed — showing defaults', 'err');
+    }
+  }
+
+  async function saveContent(){
+    if (!unlocked) return;
+    if (!adminPassword){ toast('Session lost — reload page', 'err'); return; }
+
+    const btn = el('saveBtn');
+    btn.disabled = true;
+    btn.textContent = 'Saving…';
+
+    try {
+      const payload = collect();
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/update_content_with_password`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ p_password: adminPassword, p_data: payload })
+      });
+      if (!res.ok){
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.message || 'HTTP ' + res.status);
+      }
+      status('Saved ✓', 'ok');
+      toast('Saved to Supabase ✓', 'ok');
+    } catch (e){
+      const msg = /invalid password/i.test(e.message) ? 'Wrong password' : e.message;
+      status('Save failed', 'err');
+      toast('✗ ' + msg, 'err');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Save to Supabase ✓';
+    }
+  }
+
+  // Ctrl/Cmd + S saves
+  document.addEventListener('keydown', e => {
+    if (unlocked && (e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's'){
+      e.preventDefault();
+      saveContent();
+    }
+  });
+})();
+</script>
+</body>
+</html>
