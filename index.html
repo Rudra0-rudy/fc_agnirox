@@ -943,7 +943,6 @@
 <!-- ============================================================
      CLOUD CONFIG LOADER
      ============================================================ -->
-<script src="config.js"></script>
 <script>
 (function(){
   'use strict';
@@ -951,15 +950,11 @@
   // ============================================================
   // CONFIG
   // ============================================================
-  const CFG = window.AGNIROX_CONFIG || {};
-  const BIN_ID  = CFG.BIN_ID;
-  const API_KEY = CFG.API_KEY;
-  const POLL_MS = CFG.POLL_MS || 30000;
-  const CACHE_KEY = 'agnirox_cloud_cache_v1';
-
-  const cloudReady = BIN_ID && API_KEY &&
-    BIN_ID !== 'PASTE_YOUR_BIN_ID_HERE' &&
-    API_KEY !== 'PASTE_YOUR_API_KEY_HERE';
+ const SUPABASE_URL  = 'https://qjmgqkuoapaegjlpt.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFxaW1ncWdrdW9hcGFhZWdqbHB0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE3MzA5MDIsImV4cCI6MjEwNzMwNjkwMn0.0fxipDU2eImKyaxkXXhTotSNFtv01ixMjAfwAzyac-g';
+const POLL_MS = 30000;
+const CACHE_KEY = 'agnirox_cloud_cache_v1';
+const cloudReady = true;
 
   // ============================================================
   // STATE
@@ -995,21 +990,25 @@
   // ============================================================
   // CLOUD FETCH
   // ============================================================
-  async function fetchFromCloud() {
-    if (!cloudReady) return null;
-    try {
-      const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-        headers: { 'X-Master-Key': API_KEY }
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const json = await res.json();
-      // JSONBin wraps the payload in .record
-      return json.record || json;
-    } catch (e) {
-      console.warn('[Agnirox] Cloud fetch failed:', e.message);
-      return null;
-    }
+async function fetchFromCloud() {
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/content?id=eq.1&select=data`,
+      {
+        headers: {
+          'apikey': SUPABASE_ANON,
+          'Authorization': `Bearer ${SUPABASE_ANON}`
+        }
+      }
+    );
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const rows = await res.json();
+    return rows[0]?.data || null;
+  } catch (e) {
+    console.warn('[Agnirox] Supabase fetch failed:', e.message);
+    return null;
   }
+}
 
   // ============================================================
   // RENDER — everything reads from D
