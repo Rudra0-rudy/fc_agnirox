@@ -831,6 +831,20 @@
   };
   const hasContent = (d) => d && typeof d === 'object' && Object.keys(d).length > 0;
 
+  function renderForm(raw){
+    let arr = Array.isArray(raw) ? raw : String(raw || '').split(/[\s,]+/);
+    arr = arr.map(s => String(s).trim().toUpperCase()).filter(Boolean).slice(-5);
+
+    const pips = el('formPips');
+    if (pips){
+      pips.innerHTML = arr.map(r => {
+        const cls = r === 'W' ? 'w' : r === 'D' ? 'd' : r === 'L' ? 'l' : '';
+        return `<div class="pip ${cls}">${escapeHtml(r)}</div>`;
+      }).join('');
+    }
+    setText('formLabel', arr.join(' '));
+  }
+
   // ============================================================
   // CLOUD FETCH
   // ============================================================
@@ -930,16 +944,7 @@
     }
 
     // ---- Form ----
-    const form = Array.isArray(stats.form) ? stats.form : [];
-    setText('formLabel', form.join(' '));
-    const fp = el('formPips');
-    if (fp) {
-      fp.innerHTML = form.map(f => {
-        const u = String(f).toUpperCase();
-        const cls = u === 'W' ? 'w' : u === 'D' ? 'd' : 'l';
-        return `<div class="pip ${cls}">${escapeHtml(u)}</div>`;
-      }).join('');
-    }
+    renderForm(stats.form);
 
     // ---- Squad ----
     const squadGrid = el('squadGrid');
